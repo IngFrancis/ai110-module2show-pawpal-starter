@@ -50,3 +50,19 @@ PawPal+ now includes algorithmic intelligence:
 - **Filter Tasks** – Easily filter by completion status or pet name.
 - **Recurring Tasks** – Daily/weekly tasks automatically generate the next occurrence.
 - **Conflict Detection** – Warns if two tasks are scheduled at the same time.
+
+## Testing PawPal+
+
+We have implemented an automated test suite for PawPal+ to verify core system behaviors:
+
+- **Sorting Correctness:** Tasks are sorted chronologically by time.
+- **Recurrence Logic:** Daily tasks generate a new task when completed.
+- **Conflict Detection:** Scheduler identifies tasks scheduled at the same time.
+- **Filtering:** Ability to filter tasks by completion status.
+- **Edge Cases:** Scheduler handles situations where a pet has no tasks.
+
+**Run tests with:**
+
+```bash
+python -m pytest
+```
