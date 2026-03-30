@@ -43,6 +43,12 @@ These changes made the system more modular and easier to implement.
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
 
+###
+
+- Conflict detection currently only checks for exact matching times.
+- Overlapping durations are not detected to keep the algorithm simple.
+- A more Pythonic version using list comprehensions exists but is harder to read, so we kept the simpler, more maintainable version.
+
 ---
 
 ## 3. AI Collaboration
