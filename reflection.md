@@ -13,12 +13,23 @@ Core user actions:
 2. The user can create and manage pet care tasks (feeding, walking, medication, etc.).
 3. The user can generate and view a daily schedule based on task priority and available time.
 
+I designed four main classes: Owner, Pet, Task, and Scheduler.
+
+The Owner class represents the user and manages their pets.
+The Pet class represents individual pets and stores their associated tasks.
+The Task class represents pet care activities with attributes like duration, priority, and completion status.
+The Scheduler class is responsible for organizing tasks into a daily plan based on available time and priority.
+
+This design separates responsibilities clearly and allows scheduling logic to be handled independently.
+
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
 
----
+---I simplified my initial UML design by removing unnecessary methods and focusing on core functionality.
+I also refined method names to better reflect their responsibilities, such as using generate_schedule instead of organize_tasks.
+These changes made the system more modular and easier to implement.
 
 ## 2. Scheduling Logic and Tradeoffs
 
