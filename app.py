@@ -8,7 +8,7 @@ st.markdown(
     """
 Welcome to PawPal+.
 
-This app lets you manage your pets and their tasks, and generates a daily schedule based on priorities and available time.
+This app lets you manage your pets and their tasks, and generates a daily schedule based on priorities, available time, and smart conflict detection.
 """
 )
 
@@ -54,12 +54,13 @@ if pet_names:
         duration = st.number_input("Duration (minutes)", min_value=1, max_value=240, value=20)
         priority = st.number_input("Priority (1=low, 5=high)", min_value=1, max_value=5, value=3)
         task_time = st.text_input("Time (e.g., 08:00)", value="08:00")
+        frequency = st.selectbox("Frequency", ["None", "Daily", "Weekly"])
         submit_task = st.form_submit_button("Add Task")
 
     if submit_task:
         pet = next((p for p in pets_list if p.name == selected_pet_name), None)
         if pet:
-            new_task = Task(task_title, duration, priority, task_time)
+            new_task = Task(task_title, duration, priority, task_time, frequency=frequency if frequency != "None" else None)
             pet.add_task(new_task)
             st.success(f"Task '{task_title}' added to {selected_pet_name}")
 else:
@@ -78,7 +79,8 @@ if all_tasks:
          "Duration": task.duration,
          "Priority": task.priority,
          "Time": task.time,
-         "Completed": task.completed}
+         "Completed": task.completed,
+         "Frequency": task.frequency if hasattr(task, "frequency") else "None"}
         for task in all_tasks
     ]
     st.table(task_data)
@@ -89,7 +91,6 @@ else:
 # Step 4: Generate Schedule
 # -----------------------
 st.subheader("Today's Schedule")
-
 available_time = st.number_input("Available time (minutes)", min_value=10, max_value=480, value=120)
 
 if st.button("Generate Schedule"):
@@ -97,11 +98,24 @@ if st.button("Generate Schedule"):
     for task in all_tasks:
         scheduler.add_task(task)
 
+    # Sort tasks
+    sorted_tasks = scheduler.sort_by_time()
     schedule = scheduler.generate_schedule()
 
+    # Display sorted schedule
     if schedule:
-        st.write("Here’s your schedule for today:")
+        st.markdown("### 🗓 Schedule (sorted by time)")
         for task in schedule:
-            st.write(f"- {task.title} ({task.duration} mins) [Priority: {task.priority}]")
+            if task.completed:
+                st.success(f"- {task.title} ({task.duration} mins) [Priority: {task.priority}]")
+            else:
+                st.write(f"- {task.title} ({task.duration} mins) [Priority: {task.priority}]")
     else:
         st.info("No tasks fit in the available time or no tasks added yet.")
+
+    # Detect conflicts
+    conflicts = scheduler.detect_conflicts()
+    if conflicts:
+        st.markdown("### ⚠️ Conflicts Detected")
+        for c in conflicts:
+            st.warning(c)

@@ -65,4 +65,33 @@ We have implemented an automated test suite for PawPal+ to verify core system be
 
 ```bash
 python -m pytest
+
+
+## 📸 System Architecture
+
+<a href="/course_images/ai110/uml_final.png" target="_blank">
+  <img src='/course_images/ai110/uml_final.png' title='PawPal+ UML Diagram' width='600' alt='PawPal+ UML Diagram' class='center-block' />
+</a>
+
+✅ Clicking the image opens the full-size UML diagram.
 ```
+
+## ✨ Features
+
+PawPal+ includes several intelligent features to help pet owners manage their pets efficiently:
+
+- **Sort Tasks by Time:** Tasks are displayed in chronological order automatically.
+- **Filter Tasks:** Quickly filter tasks by completion status or pet name.
+- **Recurring Tasks:** Daily tasks automatically generate the next occurrence when completed.
+- **Conflict Detection:** Warns if two tasks are scheduled at the same time.
+- **Daily Schedule Generation:** Generates a schedule based on task priorities and available time.
+- **Task Management:** Add, edit, and track tasks for multiple pets.
+- **Edge Case Handling:** Handles pets with no tasks and ensures smooth UI experience.
+
+## 📸 Demo
+
+<a href="/course_images/ai110/pawpal_screenshot.png" target="_blank">
+  <img src='/course_images/ai110/pawpal_screenshot.png' title='PawPal+ App' width='600' alt='PawPal+ App' class='center-block' />
+</a>
+
+✅ Clicking the image opens the full-size app screenshot.
